@@ -1,0 +1,81 @@
+<div class="row" *ngIf="workers.length > 0">
+    <div class="col-12">
+        <h5>{{ title }}</h5>
+    </div>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col" [style.width]="'15%'">id</th>
+        <th scope="col" [style.width]="'15%'">Имя</th>
+        <th scope="col" [style.width]="'15%'">Фамилия</th>
+        <th scope="col" [style.width]="'15%'">Номер телефона</th>
+        <ng-container *ngIf=" id === -1; else elseTh">
+            <th scope="col" [style.width]="'15%'"></th>
+        </ng-container>
+        <ng-template #elseTh>
+            <th scope="col" [style.width]="'15%'">Тип сотрудника</th>
+        </ng-template>
+        <th scope="col" [style.width]="'100px'"></th>
+        <th scope="col" [style.width]="'100px'"></th>
+        <th scope="col" [style.width]="'100px'"></th>
+        <input type="text" [style.width]="'100px'" class="form-control" placeholder="Имя" [(ngModel)]="name">
+        <input type="text" [style.width]="'100px'" class="form-control" placeholder="Фамилия" [(ngModel)]="surname">
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let worker of workers | myfilter: name: surname">
+        <th scope="row" *ngIf=" id !== worker.id; else elseId">{{worker.id}}</th>
+        <ng-template #elseId>
+            <th scope="row"><input type="number" class="form-control"
+                placeholder="{{worker.id}}"
+                [(ngModel)]="worker_id"
+                ></th>
+        </ng-template>
+        <td *ngIf="id !== worker.id; else elseName">{{worker.name}}</td>
+        <ng-template #elseName>
+            <td><input type="text" class="form-control"
+                placeholder="{{worker.name}}"
+                [(ngModel)]="Name"
+                ></td>
+         </ng-template>
+         <td *ngIf="id !== worker.id; else elseSurname">{{worker.surname}}</td>
+        <ng-template #elseSurname>
+            <td><input type="text" class="form-control"
+                placeholder="{{worker.surname}}"
+                [(ngModel)]="Surname"
+                ></td>
+         </ng-template>  
+         <td *ngIf="id !== worker.id; else elsePhone">{{worker.phone_number}}</td>
+         <ng-template #elsePhone>
+            <td><input type="text" class="form-control"
+                placeholder="{{worker.phone_number}}"
+                [(ngModel)]="phone"
+                ></td>
+         </ng-template>  
+         <td *ngIf="id !== worker.id; else elseType"></td>
+        <ng-template #elseType>
+            <td><select class="custom-select" [(ngModel)]="type">
+                <option [ngValue]="myWorkertype.programmer">Программист</option>
+                <option [ngValue]="myWorkertype.designer">Дизайнер</option>
+                <option [ngValue]="myWorkertype.copywriter">Рекламщик</option>
+                <option [ngValue]="myWorkertype.manager">Менеджер</option>
+            </select></td>
+         </ng-template>  
+         <td *ngIf="id !== worker.id; else elseEditOk"></td>
+        <ng-template #elseEditOk>
+            <td><button class="btn btn-outline-success btn-sm"
+                (click)="onEditAccept()">
+                Ок</button></td>
+         </ng-template>         
+        <td><button class="btn btn-outline-primary btn-sm"
+            (click)="onEditWorker(worker.id)">
+            Редактировать
+        </button></td>
+        <td><button class="btn btn-outline-danger btn-sm"
+            (click)="onDeleteWorker(worker.id)">
+            Удалить
+        </button></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>

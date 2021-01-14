@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 mb-3">
+     <h1> {{ title }} </h1>
+    </div>
+  </div>
+  <app-addform-worker (addWorker)="onAddWorker($event)"></app-addform-worker>
+  <app-table-workers
+   [title]="'Программисты'"
+   [workers]="getByType(MyWorkerType.programmer)"
+   (deleteWorker)="onDeleteWorker($event)"
+   (editAccept) ="onEditAccept($event)"
+   >
+  </app-table-workers>
+  <app-table-workers
+   [title]="'Дизайнеры'"
+   [workers]="getByType(MyWorkerType.designer)"
+   (deleteWorker)="onDeleteWorker($event)"
+   (editAccept) ="onEditAccept($event)"
+   >
+  </app-table-workers>
+  <app-table-workers
+   [title]="'Рекламщики'"
+   [workers]="getByType(MyWorkerType.copywriter)"
+   (deleteWorker)="onDeleteWorker($event)"
+   (editAccept) ="onEditAccept($event)"
+   >
+  </app-table-workers>
+  <app-table-workers
+   [title]="'Менеджеры'"
+   [workers]="getByType(MyWorkerType.manager)"
+   (deleteWorker)="onDeleteWorker($event)"
+   (editAccept) ="onEditAccept($event)"
+   >
+  </app-table-workers>
+</div>

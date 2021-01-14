@@ -1,0 +1,63 @@
+<form [formGroup]="workersForm" class="row mb-3">
+    <div class="col-12">
+      <h5>Добавить сотрудника</h5>
+    </div>
+    <div class="col-3">
+        <div class="form-group">
+            <input
+                type="text"
+                class="form-control"
+                placeholder="Имя"
+                formControlName="name"
+            >
+            <div class="alert alert-danger"
+                *ngIf="workersForm.controls['name'].invalid && workersForm.controls['name'].touched">
+                Не указано имя
+            </div>
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="form-group">
+            <input
+                type="text"
+                class="form-control"
+                placeholder="Фамилия"
+                formControlName="surname"
+            >
+            <div class="alert alert-danger"
+                *ngIf="workersForm.controls['surname'].invalid && workersForm.controls['surname'].touched">
+                Не указана фамилия
+            </div>
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="form-group">
+            <input
+                type="text"
+                class="form-control"
+                placeholder="Номер телефона"
+                formControlName="phone_number"
+                [textMask]="{mask: mask}"
+            >
+            <div class="alert alert-danger"
+                *ngIf="workersForm.controls['phone_number'].invalid && workersForm.controls['phone_number'].touched">
+                Не указан телефона
+            </div>
+        </div>
+    </div>
+    <div class="col-3">
+      <select class="custom-select" formControlName="type">
+        <option [ngValue]="myWorkertype.programmer">Программист</option>
+        <option [ngValue]="myWorkertype.designer">Дизайнер</option>
+        <option [ngValue]="myWorkertype.copywriter">Рекламщик</option>
+        <option [ngValue]="myWorkertype.manager">Менеджер</option>
+      </select>
+      <div class="alert alert-danger"
+                *ngIf="workersForm.controls['type'].invalid && workersForm.controls['type'].touched">
+                Не выбран отдел
+            </div>
+    </div>
+    <div class="col-12 mt-1">
+      <button type = "submit" (click)="onAddWorker()" [disabled]="workersForm.invalid" class="btn btn-outline-primary btn-sm">Добавить</button>
+    </div>
+</form>
